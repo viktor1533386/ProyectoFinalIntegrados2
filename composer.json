@@ -1,0 +1,7 @@
+{
+  "name": "apf1/integrador",
+  "description": "Bienes Raices MVC",
+  "require": {
+    "php": ">=8.0"
+  }
+}
