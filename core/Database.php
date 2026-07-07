@@ -20,7 +20,7 @@ class Database {
             die('<div style="font-family:sans-serif;padding:2rem;background:#fee;color:#c00;border-radius:8px">
                 <h3>⚠️ Error de conexión a la base de datos</h3>
                 <p>' . $e->getMessage() . '</p>
-                <p>Verifica que MySQL esté corriendo en XAMPP y que la base <strong>' . DB_NAME . '</strong> exista.</p>
+                <p>Verifica las credenciales y que la base <strong>' . DB_NAME . '</strong> exista y sea accesible.</p>
                 </div>');
         }
     }
