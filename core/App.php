@@ -55,9 +55,16 @@ class App {
         if (isset($_GET['url'])) {
             $url = $_GET['url'];
         } else {
-            // Fallback for Nginx (Railway) where .htaccess is ignored
+            // Fallback for Nginx (Railway)
             $requestUri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+            // Limpiar prefijo /public/ en caso de que Nginx no respete el root
+            $requestUri = str_replace('/public', '', $requestUri);
             $url = ltrim($requestUri, '/');
+        }
+        
+        // Evitar que intente buscar Index.phpController
+        if (str_starts_with(strtolower($url), 'index.php')) {
+            $url = trim(substr($url, 9), '/');
         }
 
         if (!empty($url)) {
