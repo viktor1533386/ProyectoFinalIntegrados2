@@ -51,8 +51,17 @@ class App {
     //  Parsear la URL desde $_GET['url']
     // ----------------------------------------------------------
     private function parseUrl(): array {
+        $url = '';
         if (isset($_GET['url'])) {
-            $url = rtrim($_GET['url'], '/');
+            $url = $_GET['url'];
+        } else {
+            // Fallback for Nginx (Railway) where .htaccess is ignored
+            $requestUri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+            $url = ltrim($requestUri, '/');
+        }
+
+        if (!empty($url)) {
+            $url = rtrim($url, '/');
             $url = filter_var($url, FILTER_SANITIZE_URL);
             return explode('/', $url);
         }
