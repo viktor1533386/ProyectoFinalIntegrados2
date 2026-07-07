@@ -12,8 +12,11 @@ EnvLoader::load(dirname(__DIR__) . '/.env');
 define('APP_ROOT', dirname(__DIR__));
 
 // --- BASE URL ---
-// Cambia 'APF1-INTEGRADOR' si renombras la carpeta en htdocs
-define('BASE_URL', EnvLoader::get('APP_URL', 'http://localhost:81/APF1-INTEGRADOR/public'));
+if (EnvLoader::get('RAILWAY_PUBLIC_DOMAIN', '')) {
+    define('BASE_URL', 'https://' . EnvLoader::get('RAILWAY_PUBLIC_DOMAIN') . '/public');
+} else {
+    define('BASE_URL', EnvLoader::get('APP_URL', 'http://localhost:81/APF1-INTEGRADOR/public'));
+}
 
 define('UPLOAD_DIR', APP_ROOT . '/public/uploads/propiedades/');
 define('UPLOAD_URL', BASE_URL . '/uploads/propiedades/');

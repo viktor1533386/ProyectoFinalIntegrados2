@@ -1,2 +1,2 @@
-[variables]
-NIXPACKS_PHP_ROOT_DIR = "public"
+[start]
+cmd = "php -S 0.0.0.0:$PORT -t public"
