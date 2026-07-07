@@ -4,6 +4,22 @@
 //  Toda petición HTTP pasa por aquí gracias al .htaccess
 // ============================================================
 
+// Asegurar que las sesiones se puedan guardar en un directorio con permisos (Nixpacks/Railway)
+$sessionPath = '/tmp/php_sessions';
+if (!is_dir($sessionPath)) {
+    @mkdir($sessionPath, 0777, true);
+}
+session_save_path($sessionPath);
+
+// Configurar cookies de sesión para que persistan correctamente bajo HTTPS en Railway
+session_set_cookie_params([
+    'lifetime' => 86400,
+    'path' => '/',
+    'secure' => isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https',
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
+
 session_start();
 
 // ── Cabeceras de seguridad HTTP (CS-09) ──────────────────────
