@@ -23,11 +23,11 @@ define('UPLOAD_URL', BASE_URL . '/uploads/propiedades/');
 define('LOG_FILE',   APP_ROOT . '/logs/auth.log');
 
 // --- BASE DE DATOS ---
-define('DB_HOST',    EnvLoader::get('DB_HOST', EnvLoader::get('MYSQLHOST', 'localhost')));
-define('DB_USER',    EnvLoader::get('DB_USER', EnvLoader::get('MYSQLUSER', 'root')));
-define('DB_PASS',    EnvLoader::get('DB_PASS', EnvLoader::get('MYSQLPASSWORD', '')));
-define('DB_NAME',    EnvLoader::get('DB_NAME', EnvLoader::get('MYSQLDATABASE', 'bienes_raices')));
-define('DB_PORT',    EnvLoader::get('DB_PORT', EnvLoader::get('MYSQLPORT', 3306)));
+define('DB_HOST',    EnvLoader::get('DB_HOST', EnvLoader::get('MYSQLHOST', EnvLoader::get('MYSQL_ADDON_HOST', 'localhost'))));
+define('DB_USER',    EnvLoader::get('DB_USER', EnvLoader::get('MYSQLUSER', EnvLoader::get('MYSQL_ADDON_USER', 'root'))));
+define('DB_PASS',    EnvLoader::get('DB_PASS', EnvLoader::get('DB_PASSWORD', EnvLoader::get('MYSQLPASSWORD', EnvLoader::get('MYSQL_ADDON_PASSWORD', '')))));
+define('DB_NAME',    EnvLoader::get('DB_NAME', EnvLoader::get('MYSQLDATABASE', EnvLoader::get('MYSQL_ADDON_DB', 'bienes_raices'))));
+define('DB_PORT',    EnvLoader::get('DB_PORT', EnvLoader::get('MYSQLPORT', EnvLoader::get('MYSQL_ADDON_PORT', 3306))));
 define('DB_CHARSET', EnvLoader::get('DB_CHARSET', 'utf8mb4'));
 
 // --- CORREO (HU: formulario de contacto) ---

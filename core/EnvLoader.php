@@ -41,8 +41,11 @@ class EnvLoader {
     // Helper: obtiene una variable de entorno con valor por defecto
     public static function get(string $name, mixed $default = null): mixed {
         $value = getenv($name);
-        if ($value === false) {
+        if ($value === false || $value === '') {
             $value = $_ENV[$name] ?? null;
+        }
+        if ($value === null || $value === '') {
+            $value = $_SERVER[$name] ?? null;
         }
         return $value !== null && $value !== '' ? $value : $default;
     }
