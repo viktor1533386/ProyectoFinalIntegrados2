@@ -78,6 +78,7 @@
           <p style="font-size:.82rem;font-weight:600;color:var(--text-2);margin-bottom:.75rem">Solicitar información</p>
 
           <form class="contact-form" action="<?= BASE_URL ?>/contacto" method="POST" data-validate>
+            <?= $this->csrfField() ?>
             <input type="hidden" name="asunto" value="Consulta sobre: <?= htmlspecialchars($propiedad->titulo) ?>">
             <label>Tu nombre *</label>
             <input type="text" name="nombre" placeholder="Juan García" required>

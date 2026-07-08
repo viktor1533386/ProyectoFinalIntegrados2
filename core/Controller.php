@@ -82,9 +82,8 @@ class Controller {
 
     // Verifica el token recibido contra el de sesión (comparación segura)
     protected function csrfValido(): bool {
-        // BYPASS TEMPORAL: debido a problemas persistentes de almacenamiento
-        // de sesiones con Nixpacks en Railway que resetean la sesión al hacer POST.
-        return true;
+        $token = $_POST['csrf_token'] ?? '';
+        return !empty($_SESSION['csrf_token']) && is_string($token) && hash_equals($_SESSION['csrf_token'], $token);
     }
 
     // Aborta con 419 si el POST no trae un token CSRF válido
