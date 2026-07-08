@@ -4,14 +4,7 @@
 //  Toda petición HTTP pasa por aquí gracias al .htaccess
 // ============================================================
 
-// Asegurar que las sesiones se puedan guardar en un directorio con permisos (Nixpacks/Railway)
-$sessionPath = dirname(__DIR__) . '/sessions';
-if (!is_dir($sessionPath)) {
-    @mkdir($sessionPath, 0777, true);
-}
-session_save_path($sessionPath);
-
-// Removemos configuraciones estrictas de cookies que podrían ser bloqueadas por el navegador detrás del proxy de Railway
+// Usando la configuración de sesión por defecto de PHP en Nixpacks
 
 session_start();
 
